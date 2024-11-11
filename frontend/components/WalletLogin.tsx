@@ -1,42 +1,17 @@
 'use client'
 import React from 'react';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { CircleUserRound } from 'lucide-react';
-import { Button } from './ui/button';
-import { useDisconnect } from 'thirdweb/react';
+import { ConnectButton, useDisconnect } from 'thirdweb/react';
+import { client } from '@/config/wallet';
+import { sepolia } from 'thirdweb/chains';
+import { BOBMainnet, BOBSepolia } from '@/config/custom-chains';
 
 const WalletLogin = ({
     activeAccount,
     wallet
 }) => {
     const { disconnect } = useDisconnect();
-
-
     return (
-        <DropdownMenu>
-            <DropdownMenuTrigger>
-                <CircleUserRound size={24} />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-                <DropdownMenuItem>
-                    {activeAccount?.address}
-                </DropdownMenuItem>
-                <DropdownMenuItem >
-                    <Button className='justify-end bg-red-500 hover:bg-red-900' onClick={() => {
-                        if (wallet) {
-                            disconnect(wallet)
-                        }
-                    }}>
-                        Disconnect
-                    </Button>
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
+        <ConnectButton client={client} chains={[sepolia, BOBSepolia, BOBMainnet]} />
     );
 };
 
