@@ -337,6 +337,20 @@ const StrategyPage = ({ strategy, bts }) => {
             )}
           </div>
 
+          <div>
+            {selectedAction === "Cross-Chain Invest" && (
+              <Link href="/bridge">
+                <Button
+                  size="lg"
+                  className="w-md"
+                  disabled={loading}
+                  onClick={handleInvest}
+                >
+                  Cross-Chain Invest
+                </Button>
+              </Link>
+            )}
+          </div>
 
           <div>
             {selectedAction === "Pay With Circle" && (
