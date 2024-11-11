@@ -3,62 +3,76 @@ import React from 'react';
 import { GatewayQuoteParams, GatewaySDK } from "@gobob/bob-sdk";
 import { Button } from '@/components/ui/button';
 import { useActiveAccount } from 'thirdweb/react';
-import { useSendGatewayTransaction } from '@gobob/sats-wagmi';
+import { useSendTransaction, useSignMessage, useWaitForTransactionReceipt } from '@gobob/sats-wagmi';
 
 const BobPage = () => {
-    const gatewaySDK = new GatewaySDK("bob-sepolia"); // or "bob-sepolia"
-
     const activeAccount = useActiveAccount();
+    const { 
+        data: hash,
+        error,
+        isPending,
+        sendTransaction 
+    } = useSendTransaction();
+
+    const {signMessage} = useSignMessage()
+
+
+    const { isLoading: isConfirming, isSuccess: isConfirmed } = 
+        useWaitForTransactionReceipt({ 
+            hash,
+        });
 
     const getOutputTokens = async () => {
-        if (!activeAccount) return
-        // const outputTokens = await gatewaySDK.getTokens();
+        if (!activeAccount) return;
 
-        // console.log("out put toe", outputTokens);
+        try {
+            // Get PSBT from API
+            const res = await fetch('/api/swapBob', {
+                method: 'POST',
+                body: JSON.stringify({ address: activeAccount.address })
+            });
+            
+            const response = await res.json();
+            console.log("psbt", response);
+            
+            // signMessage({
+            //     message: psbt
+            // },{
+            //     onSuccess:(res)=>{
+            //         console.log("REs",res);
+                    
+            //     },
+            //     onError:(err)=>{
+            //         console.log("Error",err);
+            //     }
+            // })
 
-        // const quoteParams: GatewayQuoteParams = {
-        //     fromToken: "ETH",
-        //     fromChain: "sepolia",
-        //     fromUserAddress: activeAccount.address,
-        //     toChain: "bob-sepolia",
-        //     toUserAddress: activeAccount.address,
-        //     toToken: "tBTC",
-        //     amount: 10000000000000000,
-        //     gasRefill: 10000,
-        // };
+            // // Send transaction using sats-wagmi
+            // sendTransaction({ 
+            //     psbt,
+            //     // Add any other required parameters based on your needs
+            // });
 
-        // const quote = await gatewaySDK.getQuote(quoteParams);
-        // console.log("quote", quote);
-
-        // const strategies = await gatewaySDK.getStrategies();
-        // console.log("strategies", strategies);
-
-        // const strategy = strategies.find(
-        //     (contract) => contract.integration.name === "pell-wbtc",
-        // )!;
-        // const quoteParamsStaking: GatewayQuoteParams = {
-        //     ...quoteParams,
-        //     toChain: strategy.chain.chainId,
-        //     toToken: strategy.inputToken.symbol,
-        //     strategyAddress: strategy.address,
-        // };
-
-        // console.log("quoteParamsStaking", quoteParamsStaking);
-
-        const res = await fetch('/api/swapBob', {
-            method: 'POST',
-            body: JSON.stringify({ address: activeAccount.address })
-        })
-
-        console.log("Res", res)
-
+        } catch (err) {
+            console.error("Error:", err);
+        }
     }
-
-
 
     return (
         <div>
-            <Button onClick={getOutputTokens}>Bridge</Button>
+            <Button 
+                onClick={getOutputTokens}
+                disabled={isPending}
+            >
+                {isPending ? 'Confirming...' : 'Bridge'}
+            </Button>
+
+            {hash && <div>Transaction Hash: {hash}</div>}
+            {isConfirming && <div>Waiting for confirmation...</div>}
+            {isConfirmed && <div>Transaction confirmed.</div>}
+            {error && (
+                <div>Error: {error.message}</div>
+            )}
         </div>
     );
 };

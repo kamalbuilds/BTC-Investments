@@ -21,7 +21,7 @@ const Provider = ({ children }: { children: ReactNode }) => {
 
   return (
     <WagmiProvider config={config}>
-      <SatsWagmiConfig network={Network.mainnet} queryClient={queryClient}>
+      <SatsWagmiConfig network={Network.testnet} queryClient={queryClient}>
         <ThirdwebProvider>
           {children}
           <ToastContainer theme="dark" position="top-right" autoClose={5000} />

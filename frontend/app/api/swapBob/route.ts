@@ -61,11 +61,11 @@ export async function POST(request: Request) {
     const quoteParams: GatewayQuoteParams = {
       fromChain: "Bitcoin",
       fromToken: "BTC",
-      fromUserAddress: "tb1q4cwpzmucd6jn2smypgr00lq5nud693uz59a8cp",
+      fromUserAddress: "tb1qrpdxac4tx7atld37stgmt3ywfjk76efd9050rl",
       toChain: "bob-sepolia",
-      toUserAddress: address,
-      toToken: BOB_TBTC_V2_TOKEN_ADDRESS,
-      amount: 10000, // 0.1 BTC
+      toUserAddress: "0xCCBb7511D2b13939b86C2C784eA86ef17B927d76",
+      toToken: "0x6744babdf02dcf578ea173a9f0637771a9e1c4d0",
+      amount: 100, // 0.001 BTC
       gasRefill: 1000,
     }
 
@@ -93,7 +93,12 @@ export async function POST(request: Request) {
 
     // console.log("quoteParamsStaking", quoteParamsStaking)
 
-    return NextResponse.json({ data: "hello world" }, { status: 200 })
+    const response = {
+      uuid,
+      psbtBase64,
+    }
+
+    return NextResponse.json({ data:response  }, { status: 200 })
   } catch (err) {
     console.error(err)
     return NextResponse.json(
