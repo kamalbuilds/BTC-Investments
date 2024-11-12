@@ -49,8 +49,32 @@ Diversified exposure to Bitcoin assets
 
 ## Architecture
 
-<img width="577" alt="Screenshot 2024-11-12 at 11 25 51 AM" src="https://github.com/user-attachments/assets/fac260d9-4f19-4414-9c0e-d9d19cb35647">
+```mermaid
+graph TD
+    A[User] --> B[Frontend Interface]
+    B --> C[Smart Basket Controller]
+    C --> D[ERC-7621 Contracts]
+    D --> E[BOB Gateway]
+    D --> F[Rootstock Bridge]
+    E --> G[Bitcoin Network]
+    F --> G
+    D --> H[tBTC v2 Bridge]
+    H --> G
+```
+### Deployed Contracts
 
+ERC-7621 Contracts Deployed on BOB
+
+Factory -> https://bob-sepolia.explorer.gobob.xyz/address/0x4354D9CC11b924731D98295cc127046b33aAf5a9?tab=contract
+BasketTokenStandardPair -> https://bob-sepolia.explorer.gobob.xyz/address/0x588A3Ed0668CfDDe1Ba6ECfb916aD85991F86BAb?tab=contract
+BTS -> https://bob-sepolia.explorer.gobob.xyz/address/0xeB1a6776dcD5CaC0Edf8255932529bD29aB3d80B
+Proxy -> https://bob-sepolia.explorer.gobob.xyz/address/0x7ff5536298278eF663E045F89E1eC8D7D093b211?tab=txs
+
+ERC-7621 Contracts on Rootstock
+
+Factory - https://explorer.testnet.rootstock.io/address/0x5CDcCD7aD5989f5B32497d243d4274E213f4B6D2
+BasketTokenStandardPair ->  https://explorer.testnet.rootstock.io/address/0xdf479F9Ac656861f164cFE8a8B78D971c74659ca
+BasketTokenStandard -> https://explorer.testnet.rootstock.io/address/0xeB1a6776dcD5CaC0Edf8255932529bD29aB3d80B
 
 ### Key Components:
 
