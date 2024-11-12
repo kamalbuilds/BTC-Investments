@@ -64,7 +64,7 @@ export async function POST(request: Request) {
       toChain: "bob-sepolia",
       toUserAddress: "0xCCBb7511D2b13939b86C2C784eA86ef17B927d76",
       toToken: "0x6744babdf02dcf578ea173a9f0637771a9e1c4d0",
-      amount: 100, // 0.001 BTC
+      amount: 1000, // 0.001 BTC
       gasRefill: 1000,
     }
 

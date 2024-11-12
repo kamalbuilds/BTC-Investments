@@ -52,7 +52,7 @@ const InvestmentCategory = () => {
             const res = await fetch('https://open-api.unisat.io/v1/indexer/runes/info-list?start=0&limit=12', {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer 4513221e7bad5aed143245e6eab5aa9aafb00f72073605122873ec3d1eb6accf`
+                    'Authorization': `Bearer ${process.env.NEXT_PUBLIC_UNISAT_API_KEY}`
                 }
             })
             const response = await res.json()

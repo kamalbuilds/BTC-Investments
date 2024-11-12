@@ -50,6 +50,10 @@ import CrossChainDeposit from "@/components/deposit/CrossChainDeposit"
 import { useBasket } from "@/context/BasketContext"
 import { v4 as uuidv4 } from 'uuid';
 import { RunesPriceList } from "@/config/price.config"
+import { GatewayQuoteParams, GatewaySDK } from "@gobob/bob-sdk"
+import { useSendTransaction, useSignMessage, useWaitForTransactionReceipt } from '@gobob/sats-wagmi'
+import { TBTCService } from '@/services/tbtc'
+import TBTCBridge from "@/components/TBTCBridge"
 
 type Investment = {
   percentage: number
@@ -68,6 +72,9 @@ const StrategyPage = ({ strategy, bts }) => {
   console.log("Router", router);
   console.log("searchParams", searchParams);
   console.log("id", id);
+
+  const activeAccount = useActiveAccount()
+  const connectedAddress = activeAccount?.address
 
   const { basketData, setBasketData } = useBasket();
 
@@ -97,7 +104,7 @@ const StrategyPage = ({ strategy, bts }) => {
       const res = await fetch('https://open-api.unisat.io/v1/indexer/runes/info-list?start=0&limit=10', {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer 4513221e7bad5aed143245e6eab5aa9aafb00f72073605122873ec3d1eb6accf`
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_UNISAT_API_KEY}`
         }
       })
       const response = await res.json()
@@ -164,8 +171,38 @@ const StrategyPage = ({ strategy, bts }) => {
   console.log("contributions", contributions);
 
 
-  const handleInvest = () => {
-    console.log("contributions:", contributions);
+  const handleInvest = async () => {
+
+    if(selectedAction === "Cross-Chain Invest"){
+      setBridgeDialogOpen(true)
+    }
+  }
+  
+  const handleBridgeSelect = async (bridgeType: "BOB" | "tBTC") => {
+    
+    setBridgeDialogOpen(false)
+    setSelectedBridge(bridgeType)
+    
+    if (bridgeType === "BOB") {
+      try {
+        const res = await fetch('/api/swapBob', {
+          method: 'POST',
+          body: JSON.stringify({ 
+            address: connectedAddress,
+            amount: investAmount 
+          })
+        })
+        
+        const { data: { psbtBase64 } } = await res.json()
+        const signature = await signMessage({ message: psbtBase64 })
+        console.log("signature", signature)
+      } catch (error) {
+        console.error("BOB Bridge error:", error)
+        toast.error("Failed to bridge using BOB Gateway")
+      }
+    } else {
+      <TBTCBridge />
+    }
   }
 
   // const { mutate: sendBatch, data: transactionResult } =
@@ -237,6 +274,15 @@ const StrategyPage = ({ strategy, bts }) => {
   // const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   console.log("selecteed action", selectedAction)
+
+  const { data: hash, error, isPending, sendTransaction } = useSendTransaction()
+  const { signMessage } = useSignMessage()
+  const { isLoading: isConfirming, isSuccess: isConfirmed } = 
+    useWaitForTransactionReceipt({ hash })
+
+  const [isBridgeDialogOpen, setBridgeDialogOpen] = useState(false)
+  const [selectedBridge, setSelectedBridge] = useState<"BOB" | "tBTC" | null>(null)
+
 
   return (
     <div>
@@ -440,7 +486,52 @@ const StrategyPage = ({ strategy, bts }) => {
       )} */}
 
 
+      <BridgeSelectionDialog
+        isOpen={isBridgeDialogOpen}
+        onClose={() => setBridgeDialogOpen(false)}
+        onSelect={handleBridgeSelect}
+      />
+      
+      {selectedBridge && (
+        <div className="mt-4">
+          {hash && <div className="text-sm text-gray-500">Transaction Hash: {hash}</div>}
+          {isConfirming && <div className="text-sm text-blue-500">Confirming transaction...</div>}
+          {isConfirmed && <div className="text-sm text-green-500">Transaction confirmed!</div>}
+          {error && <div className="text-sm text-red-500">Error: {error.message}</div>}
+        </div>
+      )}
     </div>
+  )
+}
+
+const BridgeSelectionDialog = ({ 
+  isOpen, 
+  onClose, 
+  onSelect 
+}: { 
+  isOpen: boolean
+  onClose: () => void
+  onSelect: (bridge: "BOB" | "tBTC") => void 
+}) => {
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Select CrossChain Investment Method</DialogTitle>
+          <DialogDescription>
+            Choose how you want to invest your Bitcoin
+          </DialogDescription>
+        </DialogHeader>
+        <div className="flex flex-col gap-4">
+          <Button onClick={() => onSelect("BOB")}>
+            BOB Gateway
+          </Button>
+          <Button onClick={() => onSelect("tBTC")}>
+            tBTC Bridge
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
   )
 }
 

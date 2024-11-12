@@ -7,6 +7,7 @@ import { Input } from './ui/input'
 import { useToast } from '@/hooks/use-toast'
 
 const TBTCBridge = () => {
+  
   const [amount, setAmount] = useState('')
   const [btcAddress, setBtcAddress] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -14,7 +15,7 @@ const TBTCBridge = () => {
   const { toast } = useToast()
 
   const handleDeposit = async () => {
-    if (!activeAccount) return
+    
     setIsLoading(true)
     
     try {
