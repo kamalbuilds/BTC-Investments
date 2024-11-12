@@ -1,11 +1,11 @@
 # OneClickBTCInvestments 🚀
 
-> *Democratizing Bitcoin Asset Investments through Smart Baskets*
+> *Democratizing Bitcoin Asset Investments through Smart Risk Management"*
 
 ## Problem Statement
-- High gas fees and complex transaction processes on Bitcoin's native chain discourage retail investors from investing in Runes & BRC-20s
+- High gas fees and complex transaction processes on Bitcoin's native chain discourage retail investors from investing in Runes & BRC-20s.
 - Limited accessibility to diversified Bitcoin asset portfolios
-- Complex bridging mechanisms between Bitcoin and Layer 2 solutions
+- Complex bridging mechanisms between Bitcoin and Layer 2 solutions.
 - Lack of risk-adjusted investment options for different investor profiles
 - High barrier to entry for new users wanting to invest in Bitcoin assets
 

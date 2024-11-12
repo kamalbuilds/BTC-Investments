@@ -56,8 +56,7 @@ export async function POST(request: Request) {
 
     // const { uuid, psbtBase64 } = await gatewaySDK.startOrder(quote, quoteParams)
 
-    const BOB_TBTC_V2_TOKEN_ADDRESS =
-      "0x03c7054bcb39f7b2e5b2c7acb37583e32d70cfa3"
+    const BOB_TBTC_V2_TOKEN_ADDRESS ="0x03c7054bcb39f7b2e5b2c7acb37583e32d70cfa3"
     const quoteParams: GatewayQuoteParams = {
       fromChain: "Bitcoin",
       fromToken: "BTC",

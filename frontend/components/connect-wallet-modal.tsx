@@ -47,6 +47,10 @@ export function ConnectWalletModal() {
             client={client}
             wallets={wallets}
             chains={[polygonAmoy, sepolia]}
+            connectModal={{
+              size: "compact",
+              title: "Connect with EVM",
+            }}
           />
         </div>
       </DialogContent>

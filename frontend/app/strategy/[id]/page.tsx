@@ -297,12 +297,6 @@ const StrategyPage = ({ strategy, bts }) => {
                     >
                       Cross-Chain Invest
                     </DropdownMenuItem>
-                    <DropdownMenuItem
-                      className="cursor-pointer"
-                      onClick={() => setSelectedAction("Pay With Circle")}
-                    >
-                      Pay With Circle
-                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>

@@ -4,6 +4,7 @@ import { GatewayQuoteParams, GatewaySDK } from "@gobob/bob-sdk";
 import { Button } from '@/components/ui/button';
 import { useActiveAccount } from 'thirdweb/react';
 import { useSendTransaction, useSignMessage, useWaitForTransactionReceipt } from '@gobob/sats-wagmi';
+import TBTCBridge from '@/components/TBTCBridge';
 
 const BobPage = () => {
     const activeAccount = useActiveAccount();
@@ -15,7 +16,7 @@ const BobPage = () => {
     } = useSendTransaction();
 
     const {signMessage} = useSignMessage()
-
+                                                                                                                            
 
     const { isLoading: isConfirming, isSuccess: isConfirmed } = 
         useWaitForTransactionReceipt({ 
@@ -60,6 +61,7 @@ const BobPage = () => {
 
     return (
         <div>
+            <TBTCBridge />
             <Button 
                 onClick={getOutputTokens}
                 disabled={isPending}
