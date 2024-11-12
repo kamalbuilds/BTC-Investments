@@ -49,18 +49,8 @@ Diversified exposure to Bitcoin assets
 
 ## Architecture
 
-```mermaid
-graph TD
-    A[User] --> B[Frontend Interface]
-    B --> C[Smart Basket Controller]
-    C --> D[ERC-7621 Contracts]
-    D --> E[BOB Gateway]
-    D --> F[Rootstock Bridge]
-    E --> G[Bitcoin Network]
-    F --> G
-    D --> H[tBTC v2 Bridge]
-    H --> G
-```
+<img width="577" alt="Screenshot 2024-11-12 at 11 25 51 AM" src="https://github.com/user-attachments/assets/fac260d9-4f19-4414-9c0e-d9d19cb35647">
+
 
 ### Key Components:
 
