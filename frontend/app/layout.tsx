@@ -14,6 +14,7 @@ import Provider from "./Provider";
 import { AuthProvider } from '@/hooks/auth'
 import { CircleProvider } from '@/hooks/circle'
 import { useState } from "react"
+import { BasketProvider } from "@/context/BasketContext"
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -47,12 +48,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <QueryClientProvider client={queryClient}>
               <AuthProvider>
                 <CircleProvider>
-                  <Provider>
-                    <div className="relative flex min-h-screen flex-col">
-                      <SiteHeader />
-                      <div className="flex-1">{children}</div>
-                    </div>
-                  </Provider>
+                  <BasketProvider>
+                    <Provider>
+                      <div className="relative flex min-h-screen flex-col">
+                        <SiteHeader />
+                        <div className="flex-1">{children}</div>
+                      </div>
+                    </Provider>
+                  </BasketProvider>
                   <TailwindIndicator />
                 </CircleProvider>
               </AuthProvider>

@@ -78,6 +78,7 @@
     "telegram-login-button": "^0.1.0",
     "thirdweb": "^5.37.0",
     "utf-8-validate": "^6.0.4",
+    "uuid": "^11.0.3",
     "viem": "^2.21.44",
     "wagmi": "^2.12.29",
     "zod": "^3.23.5"

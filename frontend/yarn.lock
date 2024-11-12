@@ -12093,6 +12093,7 @@ __metadata:
     thirdweb: "npm:^5.37.0"
     typescript: "npm:^5"
     utf-8-validate: "npm:^6.0.4"
+    uuid: "npm:^11.0.3"
     viem: "npm:^2.21.44"
     wagmi: "npm:^2.12.29"
     zod: "npm:^3.23.5"
@@ -22458,6 +22459,15 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 10c0/bcbb807a917d374a49f475fae2e87fdca7da5e5530820ef53f65ba1d12131bd81a92ecf259cc7ce317cbe0f289e7d79fdfebcef9bfa3087c8c8a2fa304c9be54
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^11.0.3":
+  version: 11.0.3
+  resolution: "uuid@npm:11.0.3"
+  bin:
+    uuid: dist/esm/bin/uuid
+  checksum: 10c0/cee762fc76d949a2ff9205770334699e0043d52bb766472593a25f150077c9deed821230251ea3d6ab3943a5ea137d2826678797f1d5f6754c7ce5ce27e9f7a6
   languageName: node
   linkType: hard
 

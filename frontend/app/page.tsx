@@ -6,26 +6,26 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ArrowRight, Globe, Wallet, Shield, Zap } from 'lucide-react'
 import Image from "next/image";
-
+import Dog_logo from '@/public/images/dog_go_to_the_moon.avif'
 
 export default function Component() {
   return (
     <div className="min-h-screen overflow-hidden">
       <div className="relative z-10">
-        <section className="container mx-auto px-4 py-24 text-center">
+        <section className="mx-auto flex flex-row justify-around px-4 py-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="mx-auto max-w-4xl"
+            className="text-left "
           >
             <h2 className="mb-6 text-6xl font-bold">
               BTC Investments in One Click
             </h2>
-            <p className="mx-auto mb-12 max-w-2xl text-xl text-gray-600">
+            <p className="mb-12 max-w-lg text-xl text-gray-600">
               Navigate the future of cross-chain investments with AI-powered portfolio management and seamless asset transfers across multiple blockchains.
             </p>
-            <div className="flex justify-center space-x-4">
+            <div className="flex space-x-4">
               <Link href='/investment-type'>
                 <Button size="lg" className="bg-gradient-to-r from-teal-500 to-teal-600">
                   Start Investing <ArrowRight className="ml-2" />
@@ -36,9 +36,16 @@ export default function Component() {
               </Button>
             </div>
           </motion.div>
+          <div className="ml-8 grid grid-cols-2 justify-center gap-1">
+            <Image src={Dog_logo} alt="Dog_go_to_the_moon" width={140} height={140} />
+            <Image src={Dog_logo} alt="Dog_go_to_the_moon" width={140} height={140} />
+            <Image src={Dog_logo} alt="Dog_go_to_the_moon" width={140} height={140} />
+            <Image src={Dog_logo} alt="Dog_go_to_the_moon" width={140} height={140} />
+          </div>
+
         </section>
 
-        <section className="container mx-auto px-4 py-24 bg-muted">
+        <section className="bg-muted container mx-auto px-4 py-24">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {[
               {
@@ -76,7 +83,7 @@ export default function Component() {
                 <Card className="group relative overflow-hidden transition-shadow duration-300 hover:shadow-lg">
                   <CardContent className="p-6">
                     <div className={`inline-flex rounded-lg bg-gradient-to-r p-3 ${feature.color} mb-4`}>
-                      <feature.icon className="h-6 w-6 text-white" />
+                      <feature.icon className="size-6 text-white" />
                     </div>
                     <h3 className="mb-2 text-xl font-semibold">{feature.title}</h3>
                     <p className="text-gray-600">{feature.description}</p>
@@ -99,9 +106,9 @@ export default function Component() {
             >
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <div className="space-y-2">
-                  <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Personalized Strategies</div>
+                  <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm">Personalized Strategies</div>
                   <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Tailor Your Investment Journey</h2>
-                  <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  <p className="text-muted-foreground max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                     Our customizable AI bot can help you create personalized investment strategies based on your risk
                     tolerance, financial goals, and market conditions.
                   </p>
