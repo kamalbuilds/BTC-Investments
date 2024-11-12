@@ -53,8 +53,8 @@ export default function Component() {
             {[
               {
                 icon: Globe,
-                title: "Cross-Chain Access",
-                description: "Seamlessly invest across multiple blockchains with our integrated CCTP protocol",
+                title: "Basket of Runes",
+                description: "Varieties of baskets of runes to select and invest to",
                 color: "from-teal-500 to-teal-600"
               },
               {
@@ -72,7 +72,7 @@ export default function Component() {
               {
                 icon: Zap,
                 title: "Real-Time Analytics",
-                description: "Track performance and manage risk with advanced analytics",
+                description: "Real time price in usd and sats to update the user with best strategy",
                 color: "from-pink-500 to-pink-600"
               }
             ].map((feature, index) => (
@@ -109,11 +109,10 @@ export default function Component() {
             >
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <div className="space-y-2">
-                  <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm">Personalized Strategies</div>
-                  <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Tailor Your Investment Journey</h2>
+                  <div className="bg-muted inline-block rounded-lg px-3 py-1 text-sm">Fully Customisable</div>
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Adjust your contribution for Runes</h2>
                   <p className="text-muted-foreground max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                    Our customizable AI bot can help you create personalized investment strategies based on your risk
-                    tolerance, financial goals, and market conditions.
+                    Select your runes basket from a number of baskets and decide your own percentage that you would like to contribute too everything in a user friendly manner
                   </p>
                 </div>
               </div>
@@ -127,7 +126,7 @@ export default function Component() {
             >
               <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
                 <Image
-                  src="/aibot.png"
+                  src="/landingpage_info.png"
                   width="550"
                   height="310"
                   alt="Personalized Strategies"
@@ -135,24 +134,21 @@ export default function Component() {
                 />
                 <div className="flex flex-col justify-center space-y-4">
                   <div className="grid gap-1">
-                    <h3 className="text-xl font-bold">Customizable AI Bot</h3>
+                    <h3 className="text-xl font-bold">Fully Customizable Investments</h3>
                     <p className="text-muted-foreground">
-                      Leverage our advanced AI bot to create personalized investment strategies tailored to your unique
-                      financial goals and risk profile.
+                      Take control of your Bitcoin asset investments with OneClickBTCInvestments. All this is done seamlessly in a user-friendly interface, empowering you to manage your portfolio your way.
                     </p>
                   </div>
                   <div className="grid gap-1">
-                    <h3 className="text-xl font-bold">Telegram Integration</h3>
+                    <h3 className="text-xl font-bold">Varieties of Runes Baskets</h3>
                     <p className="text-muted-foreground">
-                      Receive real-time updates, analytics, and portfolio management tools directly through our Telegram
-                      bot integration.
+                      Select from a varieties of baskets which contains different runes depending upon price, mints, supply or just favourites.
                     </p>
                   </div>
                   <div className="grid gap-1">
-                    <h3 className="text-xl font-bold">Flexible Strategies</h3>
+                    <h3 className="text-xl font-bold">Flexible and Adaptive Strategies</h3>
                     <p className="text-muted-foreground">
-                      Easily adjust your investment strategies as your financial goals or market conditions change,
-                      ensuring your portfolio remains optimized.
+                      Adjust your strategies effortlessly as market conditions or your financial goals change. OneClickBTCInvestments enables you to stay agile and make dynamic updates, ensuring your portfolio always aligns with your investment aspirations.
                     </p>
                   </div>
                 </div>
