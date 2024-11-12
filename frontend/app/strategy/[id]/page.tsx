@@ -241,147 +241,154 @@ const StrategyPage = ({ strategy, bts }) => {
   return (
     <div>
       {isLoading ? (
-        <div>Loading</div>
+        <div className="flex min-h-screen items-center justify-center"><Spinner /></div>
       ) : (
-        <div>
-          <div className="my-12 ml-12">
-            <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-              {basketRunesData.name}
-            </h1>
-
-            <p className="text-muted-foreground max-w-[700px] text-lg">
-              Set the percentage you want to contribute to
-            </p>
-          </div>
+        <>
           <div>
-            <div className="mb-4 ml-12 flex flex-col justify-start gap-1.5">
-              <div className="flex flex-col gap-4">
-                <Label
-                  htmlFor="Funds"
-                  className="text-muted-foreground max-w-[700px] text-lg"
-                >
-                  Enter Amount
-                </Label>
-                <Input
-                  id="Funds"
-                  placeholder="Enter Amount to invest"
-                  type="text"
-                  value={investAmount}
-                  onChange={(e) => {
-                    const value = e.target.value
-                    setInvestAmount(value)
-                  }}
-                  className="w-80"
-                  min="0"
-                  step="any"
-                />
-              </div>
-              <DropdownMenu>
-                <DropdownMenuTrigger className="mb-4 w-80">
-                  <div className="text-muted-foreground flex flex-row items-center justify-between border p-2 px-3">
-                    {selectedAction == "" ? "Select Action" : selectedAction}
-                    <ArrowDown size={20} />
-                  </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-80">
-                  <DropdownMenuItem
-                    className="cursor-pointer"
-                    onClick={() => setSelectedAction("Invest")}
-                  >
-                    Invest
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    className="cursor-pointer"
-                    onClick={() => setSelectedAction("Cross-Chain Invest")}
-                  >
-                    Cross-Chain Invest
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    className="cursor-pointer"
-                    onClick={() => setSelectedAction("Pay With Circle")}
-                  >
-                    Pay With Circle
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+            <div className="my-12 ml-12">
+              <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+                {basketRunesData.name}
+              </h1>
 
-            {isLoading ? (
-              <div className="flex items-center justify-center">
-                <Spinner />
+              <p className="text-muted-foreground max-w-[700px] text-lg">
+                Set the percentage you want to contribute to
+              </p>
+            </div>
+            <div>
+              <div className="mb-4 ml-12 flex flex-col justify-start gap-1.5">
+                <div className="flex flex-col gap-4">
+                  <Label
+                    htmlFor="Funds"
+                    className="text-muted-foreground max-w-[700px] text-lg"
+                  >
+                    Enter Amount
+                  </Label>
+                  <Input
+                    id="Funds"
+                    placeholder="Enter Amount to invest"
+                    type="text"
+                    value={investAmount}
+                    onChange={(e) => {
+                      const value = e.target.value
+                      setInvestAmount(value)
+                    }}
+                    className="w-80"
+                    min="0"
+                    step="any"
+                  />
+                </div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="mb-4 w-80">
+                    <div className="text-muted-foreground flex flex-row items-center justify-between border p-2 px-3">
+                      {selectedAction == "" ? "Select Action" : selectedAction}
+                      <ArrowDown size={20} />
+                    </div>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-80">
+                    <DropdownMenuItem
+                      className="cursor-pointer"
+                      onClick={() => setSelectedAction("Invest")}
+                    >
+                      Invest
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="cursor-pointer"
+                      onClick={() => setSelectedAction("Cross-Chain Invest")}
+                    >
+                      Cross-Chain Invest
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="cursor-pointer"
+                      onClick={() => setSelectedAction("Pay With Circle")}
+                    >
+                      Pay With Circle
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
-            ) : (
-              <Table>
-                <TableCaption>Customise your contributions.</TableCaption>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Symbol</TableHead>
-                    <TableHead>Rune Name</TableHead>
-                    <TableHead>Supply</TableHead>
-                    <TableHead>Holders</TableHead>
-                    <TableHead>Price</TableHead>
-                    <TableHead className="w-[350px]">Set Contribution</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {basketRunesData &&
-                    basketRunesData.runes.map((rune) => (
-                      <TableRow key={rune.runeid}>
-                        <TableCell className="font-medium">
-                          <div>
-                            {rune.symbol}
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex flex-col">
-                            <p className="text-lg font-medium leading-none">
-                              {rune.rune}
-                            </p>
-                            <p className="text-muted-foreground text-sm">
-                              {rune.spacedRune}
-                            </p>
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <p className="capitalize">{Number(rune.supply).toLocaleString()}</p>
-                        </TableCell>
-                        <TableCell>
-                          <p className="">{rune.holders.toLocaleString()}</p>
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex flex-col">
-                            <p className="text-lg font-medium leading-none">
-                              {rune.sats} sats
-                            </p>
-                            <p className="text-muted-foreground text-sm">
-                              ${rune.priceinusd}
-                            </p>
-                          </div>
-                        </TableCell>
-                        <TableCell className="text-right">
-                          <div className="flex items-center gap-2">
-                            <Slider
-                              onValueChange={(value) => {
-                                handleInvestmentChange(rune, value[0])
-                              }}
-                              max={100}
-                              value={[contributions[rune.runeid]?.percentage || 0]} // Default to 0 if not set
-                              className="w-[250px]"
-                            />
-                            <p>{contributions[rune.runeid]?.percentage} %</p>
-                          </div>
-                          <p>
-                            Investment Amount: $
-                            {((parseFloat(investAmount) || 0) * (contributions[rune.runeid]?.percentage || 0) / 100).toFixed(2)}
-                          </p>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            )}
+
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  <Spinner />
+                </div>
+              ) : (
+                <Table>
+                  <TableCaption>Customise your contributions.</TableCaption>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Symbol</TableHead>
+                      <TableHead>Rune Name</TableHead>
+                      <TableHead>Supply</TableHead>
+                      <TableHead>Holders</TableHead>
+                      <TableHead>Price</TableHead>
+                      <TableHead className="w-[350px]">Set Contribution</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {basketRunesData &&
+                      basketRunesData.runes.map((rune) => (
+                        <TableRow key={rune.runeid}>
+                          <TableCell className="font-medium">
+                            <div>
+                              {rune.symbol}
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex flex-col">
+                              <p className="text-lg font-medium leading-none">
+                                {rune.rune}
+                              </p>
+                              <p className="text-muted-foreground text-sm">
+                                {rune.spacedRune}
+                              </p>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <p className="capitalize">{Number(rune.supply).toLocaleString()}</p>
+                          </TableCell>
+                          <TableCell>
+                            <p className="">{rune.holders.toLocaleString()}</p>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex flex-col">
+                              <p className="text-lg font-medium leading-none">
+                                {rune.sats} sats
+                              </p>
+                              <p className="text-muted-foreground text-sm">
+                                ${rune.priceinusd}
+                              </p>
+                            </div>
+                          </TableCell>
+                          <TableCell className="text-right">
+                            <div className="flex items-center gap-2">
+                              <Slider
+                                onValueChange={(value) => {
+                                  handleInvestmentChange(rune, value[0])
+                                }}
+                                max={100}
+                                value={[contributions[rune.runeid]?.percentage || 0]}
+                                className="w-[250px]"
+                              />
+                              <p>{contributions[rune.runeid]?.percentage} %</p>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                  </TableBody>
+                </Table>
+              )}
+            </div>
           </div>
-        </div>
+          <div className="mt-4 flex justify-center">
+            <Button
+              size="lg"
+              className="w-md cursor-pointer"
+              onClick={handleInvest}
+            >
+              Invest
+            </Button>
+          </div>
+        </>
       )}
 
 
@@ -438,15 +445,7 @@ const StrategyPage = ({ strategy, bts }) => {
         </div>
       )} */}
 
-      <div className="mt-4 flex justify-center">
-        <Button
-          size="lg"
-          className="w-md cursor-pointer"
-          onClick={handleInvest}
-        >
-          Invest
-        </Button>
-      </div>
+
     </div>
   )
 }

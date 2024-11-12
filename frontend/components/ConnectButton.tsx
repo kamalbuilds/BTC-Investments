@@ -45,7 +45,7 @@ const ConnectButton = () => {
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
                     <DialogTrigger asChild>
                         <Button className="bg-emerald-600 text-white hover:bg-emerald-700">
-                            Connect Wallet
+                            Connect Bitcoin
                         </Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[425px]">

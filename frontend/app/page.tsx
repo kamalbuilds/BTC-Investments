@@ -7,6 +7,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { ArrowRight, Globe, Wallet, Shield, Zap } from 'lucide-react'
 import Image from "next/image";
 import Dog_logo from '@/public/images/dog_go_to_the_moon.avif'
+import pup_world from '@/public/images/pups_world_face.avif'
+import rsic_rune from '@/public/images/rsic_rune.webp'
+import satoshi_nakamoto from '@/public/images/satoshi_nakamoto.webp'
 
 export default function Component() {
   return (
@@ -38,9 +41,9 @@ export default function Component() {
           </motion.div>
           <div className="ml-8 grid grid-cols-2 justify-center gap-1">
             <Image src={Dog_logo} alt="Dog_go_to_the_moon" width={140} height={140} />
-            <Image src={Dog_logo} alt="Dog_go_to_the_moon" width={140} height={140} />
-            <Image src={Dog_logo} alt="Dog_go_to_the_moon" width={140} height={140} />
-            <Image src={Dog_logo} alt="Dog_go_to_the_moon" width={140} height={140} />
+            <Image src={pup_world} alt="pup_world_face" width={140} height={140} />
+            <Image src={rsic_rune} alt="risc_rune" width={140} height={140} />
+            <Image src={satoshi_nakamoto} alt="satoshi_nakamoto" width={140} height={140} />
           </div>
 
         </section>
