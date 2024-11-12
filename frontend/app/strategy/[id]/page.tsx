@@ -54,6 +54,7 @@ import { GatewayQuoteParams, GatewaySDK } from "@gobob/bob-sdk"
 import { useSendTransaction, useSignMessage, useWaitForTransactionReceipt } from '@gobob/sats-wagmi'
 import { TBTCService } from '@/services/tbtc'
 import TBTCBridge from "@/components/TBTCBridge"
+import { useAccount } from "@gobob/sats-wagmi"
 
 type Investment = {
   percentage: number
@@ -72,6 +73,8 @@ const StrategyPage = ({ strategy, bts }) => {
   console.log("Router", router);
   console.log("searchParams", searchParams);
   console.log("id", id);
+  const { connector } = useAccount();
+  const gatewaySDK = new GatewaySDK('bob-sepolia');
 
   const activeAccount = useActiveAccount()
   const connectedAddress = activeAccount?.address
@@ -193,9 +196,12 @@ const StrategyPage = ({ strategy, bts }) => {
           })
         })
         
-        const { data: { psbtBase64 } } = await res.json()
-        const signature = await signMessage({ message: psbtBase64 })
-        console.log("signature", signature)
+        const { data: { psbtBase64, uuid } } = await res.json()
+        const bitcoinTxHex = await connector?.signAllInputs(psbtBase64!);
+        console.log("Hex >>",bitcoinTxHex);
+        const tx = await gatewaySDK.finalizeOrder(uuid, bitcoinTxHex!);
+        console.log("Tx success",tx);
+
       } catch (error) {
         console.error("BOB Bridge error:", error)
         toast.error("Failed to bridge using BOB Gateway")
